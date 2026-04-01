@@ -16,6 +16,9 @@
 		A10007 /* YakScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10007 /* YakScene.swift */; };
 		A10010 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B10010 /* Assets.xcassets */; };
 		A10013 /* Quotes.plist in Resources */ = {isa = PBXBuildFile; fileRef = B10013 /* Quotes.plist */; };
+		A20001 /* QuoteSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20001 /* QuoteSnapshotTests.swift */; };
+		A20002 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B10010 /* Assets.xcassets */; };
+		A20003 /* Quotes.plist in Resources */ = {isa = PBXBuildFile; fileRef = B10013 /* Quotes.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,10 +35,19 @@
 		B10021 /* CallTheYak.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CallTheYak.entitlements; sourceTree = "<group>"; };
 		B10030 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		B10099 /* CallTheYak.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CallTheYak.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B20001 /* QuoteSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteSnapshotTests.swift; sourceTree = "<group>"; };
+		B20099 /* CallTheYakTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CallTheYakTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		C10001 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C20001 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -49,6 +61,7 @@
 			isa = PBXGroup;
 			children = (
 				D10001 /* CallTheYak */,
+				D20001 /* CallTheYakTests */,
 				D10099 /* Products */,
 				B10030 /* Config.xcconfig */,
 			);
@@ -84,8 +97,17 @@
 			isa = PBXGroup;
 			children = (
 				B10099 /* CallTheYak.app */,
+				B20099 /* CallTheYakTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		D20001 /* CallTheYakTests */ = {
+			isa = PBXGroup;
+			children = (
+				B20001 /* QuoteSnapshotTests.swift */,
+			);
+			path = CallTheYakTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -107,6 +129,23 @@
 			productName = CallTheYak;
 			productReference = B10099 /* CallTheYak.app */;
 			productType = "com.apple.product-type.application";
+		};
+		E20001 /* CallTheYakTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F20003 /* Build configuration list for PBXNativeTarget "CallTheYakTests" */;
+			buildPhases = (
+				C20002 /* Sources */,
+				C20001 /* Frameworks */,
+				C20003 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CallTheYakTests;
+			productName = CallTheYakTests;
+			productReference = B20099 /* CallTheYakTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -132,6 +171,7 @@
 			projectRoot = "";
 			targets = (
 				E10001 /* CallTheYak */,
+				E20001 /* CallTheYakTests */,
 			);
 		};
 /* End PBXProject section */
@@ -143,6 +183,15 @@
 			files = (
 				A10010 /* Assets.xcassets in Resources */,
 				A10013 /* Quotes.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C20003 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A20002 /* Assets.xcassets in Resources */,
+				A20003 /* Quotes.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -160,6 +209,14 @@
 				A10005 /* SpriteSheet.swift in Sources */,
 				A10006 /* SettingsView.swift in Sources */,
 				A10007 /* YakScene.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C20002 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A20001 /* QuoteSnapshotTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -345,6 +402,38 @@
 			};
 			name = Release;
 		};
+		F20020 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.codybrom.calltheyak.tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		F20021 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.codybrom.calltheyak.tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -362,6 +451,15 @@
 			buildConfigurations = (
 				F10020 /* Debug */,
 				F10021 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F20003 /* Build configuration list for PBXNativeTarget "CallTheYakTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F20020 /* Debug */,
+				F20021 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -43,10 +43,4 @@ struct BruceApp: App {
 }
 
 final class AppDelegate: NSObject, NSApplicationDelegate {
-    func applicationDidFinishLaunching(_ notification: Notification) {
-        // Trigger Bruce's first appearance shortly after launch
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-            YakManager.shared.callTheYak()
-        }
-    }
 }

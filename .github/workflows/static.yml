@@ -31,13 +31,24 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Build sprites
+        run: |
+          mkdir -p docs/sprites
+          atlas=CallTheYak/Resources/Assets.xcassets/Bruce.spriteatlas
+          for type in trot graze scared grass; do
+            for i in 0 1 2 3; do
+              cp "$atlas/${type}_${i}.imageset/${type}_${i}.png" docs/sprites/
+            done
+          done
+          for i in 0 1 2 3 4; do
+            cp "$atlas/poof_${i}.imageset/poof_${i}.png" docs/sprites/
+          done
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # Upload entire repository
-          path: 'docs'
+          path: "docs"
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v5

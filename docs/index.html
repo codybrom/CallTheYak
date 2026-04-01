@@ -117,10 +117,49 @@
       .footer a {
         color: #666;
       }
+
+      .try-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: transparent;
+        color: #cc9966;
+        border: 1.5px solid #cc9966;
+        font-size: 1.05rem;
+        font-weight: 600;
+        padding: 0.75rem 1.75rem;
+        border-radius: 10px;
+        cursor: pointer;
+        transition:
+          background 0.15s,
+          transform 0.1s,
+          box-shadow 0.15s;
+        margin-bottom: 0.75rem;
+        font-family: inherit;
+      }
+
+      .try-btn:hover {
+        background: rgba(204, 153, 102, 0.1);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(204, 153, 102, 0.2);
+      }
+
+      #yak-stage {
+        position: fixed;
+        bottom: 8px;
+        left: 0;
+        width: 100%;
+        pointer-events: none;
+        z-index: 100;
+      }
     </style>
   </head>
   <body>
-    <img class="bruce" src="https://raw.githubusercontent.com/codybrom/CallTheYak/refs/heads/main/bruce.svg" alt="Bruce the Wonder Yak" />
+    <img
+      class="bruce"
+      src="https://raw.githubusercontent.com/codybrom/CallTheYak/refs/heads/main/bruce.svg"
+      alt="Bruce the Wonder Yak"
+    />
 
     <h1>Call the Yak</h1>
     <p class="tagline">
@@ -128,6 +167,21 @@
       <i>Bruce the Wonder Yak</i> trots across the bottom of your screen and
       shares pearls of wisdom.
     </p>
+
+    <button class="try-btn" id="call-btn" onclick="callTheYak()">
+      <svg
+        width="16"
+        height="16"
+        viewBox="0 0 16 16"
+        fill="currentColor"
+        aria-hidden="true"
+      >
+        <path
+          d="M3 2.5a.5.5 0 0 1 .776-.416l9 5.5a.5.5 0 0 1 0 .832l-9 5.5A.5.5 0 0 1 3 13.5v-11Z"
+        />
+      </svg>
+      Try in Your Browser
+    </button>
 
     <a
       class="download-btn"
@@ -182,5 +236,631 @@
         >Source on GitHub</a
       >
     </p>
+    <canvas id="yak-stage"></canvas>
+
+    <script>
+      // ── Quotes (from Quotes.plist) ────────────────────────────────────────────
+      const QUOTES = [
+        "If we can't ship this puppy by then, we might as well be herding yaks.",
+        "I'm glad it's getting weird again. I didn't understand it when it wasn't weird.",
+        "The C switch statement: Mmmmmm! Chock full of nooses!",
+        "That would be like crossing the streams or something.",
+        "Mmmm... Chicago style pizza!",
+        "I've got my blankie, I'm good to go.",
+        "A lot of this job is mental.",
+        "Mostly clockwise, sometimes reverses...",
+        "What's the sound of one luma clamping?",
+        "I just wanna be in the app!",
+        "Oh, rough and woeful music which we have! Cause it to sound!",
+        "The Yak is a delightful creature... rather like a visit with a bovine Confucious",
+        "Nobody might know anything.",
+        "I don't know, somehow it just works.",
+        "How do you tempt a Yak?",
+        "Chocolate covered espresso beans!",
+        "We're not the engineers you're looking for. Move along, move along.",
+        "The little cartoon man is messing with my head!",
+        "Speed kills, but sync maims.",
+        "It's compatible with it's legacy.",
+        "Twix bars: A brand-new bad habit!",
+        "Many Yaks were exploited during the creation of this product.",
+        "I can neither confirm nor deny the existence of nuclear weapons in this product.",
+        "I'm concerned because the cow sounded pretty threatening.",
+        "I am NOT a mad cow!",
+        "I don't care who's on the other end of the phone... Hang it up!",
+        "I have deniable plausibility.",
+        "Note to the galley: Romulan Cosmos no longer to be served on school nights!",
+        "Carrot and a footprint.",
+        "Asteriskified?",
+        "Where's a single Yak to go now that the Edit Bar is gone?",
+        "Aaargh, I forgot to pay the rent!",
+        "When you have a car that's that uncool, you just gotta drive stupid.",
+        "Did it happen with yesterday's umbrella?",
+        "When can I do color correction by the pool?",
+        "Are you filling his head with chocolate?",
+        "The lights going off at midnight, it's almost like a slap in the face... Hey, stupid, it's tomorrow!",
+        "Yeah, that's covered under item #152.",
+        "I was probably the last one to see him alive.",
+        "We're not play'in poker here.",
+        "All I want for Christmas is a stack trace!",
+        "Think PIKE!",
+        "Don't look at me. They're not my flying monkeys.",
+        'What, were you expecting "Moo" or something?',
+        "This is not a Yak Bite.",
+        "Somehow I can't convince myself that this isn't all just one big hack.",
+        "At least Spock had stone knives and bear skins!",
+        "It's a single malt problems.",
+        "Everyone drops it the first time.",
+        "OK... who's job is it to write the Flush Wizard?",
+        "Controlled evil is not necessarily bad.",
+        "Pinky, are you thinking what I'm thinking? I think so, Brain... but can you do that with a Yak?",
+        "It's like a gob of peanut butter for the roof of your brain.",
+        "Savor the unbridled complexity that we've crafted for you.",
+        "Look, there's no such thing as a 'Clacker'!",
+        "Don't panic - everything is under control. There is no fire. Have a great day.",
+        'Get rid of the spasmic "U".',
+        "That's my fault originally, but many others are to blame since.",
+        "The disco ball is spinning, but no one's home.",
+        "There were many lessons learned during the early years.",
+        "That movie had plot holes big enough to drive whole other movies through!",
+        "Please refrain from sucking.",
+        "I'm highly in favor of putting in code to do stuff.",
+        "I want to see lots of deliminators.",
+        "Can I get that for free?",
+        "Wrong thinking will be punished. Right thinking will be as quickly rewarded.",
+        "All right, Who replaced the Oscillation OverThruster with an AutoSyncDetector?",
+        "Will, you're scaring the children.",
+        "Didn't this used to be purple?",
+        "Hellooooo! I'm trying to edit here!",
+        "Remember-- thingies are free!",
+        "...and so forth and so on...",
+        "That and a folded napkin will level a chair.",
+        "Oops, It works!",
+        "Free drink? That just cost me $200!",
+        "Don't lick your zipper.",
+        "I went to pull it out and it was like three feet long.",
+        "Kinda cool; kind of a hack. Like so much of this business.",
+        "Salad is a lot of work!",
+        'The opposite of "weird" is "boring".',
+        "Do or do not. There is no don't.",
+        "Thirty quatloos says it crashes during launch!",
+        "Check your Caps Lock key.",
+        "...by an expert. Worse, a committee of experts.",
+        "There's a disease going around in QA right now. Stay away from those guys.",
+        "What? You were expecting a paper clip?",
+        "Personally, I _like_ editing under a tree!",
+        "We're going to leave the underwear in the tutorial.",
+        "Ok, Nobody prints, Nobody gets hurt!",
+        "Please hold for the next available consumer.",
+        "Cows didn't have dynamite and steam shovels.",
+        "This is so lame it hurts.",
+        "She's speaking in tongues.",
+        "I was the innocent victim of a drive by coding.",
+        "It's all wired up... we just have to turn it on.",
+        "Where's the 'Poof' manager? It's the international symbol for \"Your zipper's open\".",
+        "There exists, but you can't get there from here.",
+        "There was a memo?",
+        "That's a little too non-virtual for this group.",
+        "You can call me Bruce the Wonder Yak.",
+      ];
+
+      // ── Sprite loader ─────────────────────────────────────────────────────────
+      const SCALE = 2;
+      const CELL = 32; // native px per cell
+      const CELL_S = CELL * SCALE;
+      const STAGE_H = 160; // tall enough for bubble above Bruce
+
+      function loadImg(src) {
+        return new Promise((resolve) => {
+          const img = new Image();
+          img.onload = () => resolve(img);
+          img.src = src;
+        });
+      }
+
+      async function loadSprites() {
+        const load = (prefix, count) =>
+          Promise.all(
+            Array.from({ length: count }, (_, i) =>
+              loadImg(`sprites/${prefix}_${i}.png`),
+            ),
+          );
+        const [trot, graze, scared, grass, poof] = await Promise.all([
+          load("trot", 4),
+          load("graze", 4),
+          load("scared", 4),
+          load("grass", 4),
+          load("poof", 5),
+        ]);
+        return { trot, graze, scared, grass, poof };
+      }
+
+      // ── State machine ─────────────────────────────────────────────────────────
+      const STATE = {
+        idle: 0,
+        grassGrowing: 1,
+        entering: 2,
+        trotting: 4,
+        triggeredTrot: 5,
+        preTalk: 6,
+        talking: 7,
+        postTalk: 8,
+        runningAway: 10,
+      };
+
+      const TROT_SPEED = 1.0 * SCALE;
+      const SCARED_SPEED = 6.0 * SCALE;
+      const MOUSE_PROXIMITY = 80 * SCALE;
+
+      let yak = null; // set when initialized
+
+      function initYak(sprites, canvas) {
+        const W = canvas.width;
+        return {
+          sprites,
+          canvas,
+          state: STATE.idle,
+          tick: 0,
+          frame: 0,
+          bruceX: W + CELL_S,
+          bruceVisible: false,
+          grassX: 0,
+          grassFrame: -1,
+          poofFrame: -1,
+          bubbleStage: 0,
+          quote: "",
+          talkingTicks: 0,
+          scaredPauseTicks: 0,
+          mouseX: -9999,
+          mouseY: -9999,
+        };
+      }
+
+      function every(y, n) {
+        return y.tick % n === 0;
+      }
+
+      function randomGrassX(canvasW) {
+        return canvasW * 0.3 + Math.random() * canvasW * 0.4;
+      }
+
+      function selectQuote() {
+        return QUOTES[Math.floor(Math.random() * QUOTES.length)];
+      }
+
+      function tickYak(y) {
+        y.tick++;
+        checkMouse(y);
+
+        switch (y.state) {
+          case STATE.idle:
+            tickIdle(y);
+            break;
+          case STATE.grassGrowing:
+            tickGrassGrowing(y);
+            break;
+          case STATE.entering:
+            tickEntering(y);
+            break;
+          case STATE.trotting:
+            tickTrotting(y);
+            break;
+          case STATE.triggeredTrot:
+            tickTriggeredTrot(y);
+            break;
+          case STATE.preTalk:
+            tickPreTalk(y);
+            break;
+          case STATE.talking:
+            tickTalking(y);
+            break;
+          case STATE.postTalk:
+            tickPostTalk(y);
+            break;
+          case STATE.runningAway:
+            tickRunningAway(y);
+            break;
+        }
+      }
+
+      function tickIdle(y) {
+        if (!every(y, 20)) return;
+        y.frame++;
+        if (y.frame >= 6) {
+          y.frame = 0;
+          y.state = STATE.grassGrowing;
+          const W = y.canvas.width;
+          y.grassX = randomGrassX(W);
+          y.bruceX = W + CELL_S;
+        }
+      }
+
+      function tickGrassGrowing(y) {
+        if (!every(y, 12)) return;
+        y.frame++;
+        if (y.frame <= 5) {
+          y.poofFrame = y.frame - 1;
+          y.grassFrame = -1;
+        } else if (y.frame <= 6) {
+          y.poofFrame = -1;
+          y.grassFrame = 3;
+        } else {
+          y.frame = 0;
+          y.poofFrame = -1;
+          y.grassFrame = 3;
+          y.state = STATE.entering;
+          y.bruceVisible = true;
+        }
+      }
+
+      function tickEntering(y) {
+        y.bruceX -= TROT_SPEED;
+        if (every(y, 4)) y.frame++;
+        y.bruceVisible = true;
+        if (y.bruceX <= y.grassX + CELL_S * 0.5) {
+          y.bruceX = y.grassX + CELL_S * 0.5;
+          y.frame = 0;
+          y.state = STATE.preTalk;
+        }
+      }
+
+      function tickTrotting(y) {
+        y.bruceX -= TROT_SPEED;
+        if (every(y, 4)) y.frame++;
+        if (y.bruceX < -(CELL_S * 2)) {
+          dismissYak(y);
+        }
+      }
+
+      function tickTriggeredTrot(y) {
+        const W = y.canvas.width;
+        if (y.grassX === 0) y.grassX = randomGrassX(W);
+        if (y.bruceX === 0 || y.bruceX > W + CELL_S) y.bruceX = W + CELL_S;
+
+        if (y.grassFrame < 3) {
+          if (every(y, 10)) {
+            y.frame++;
+            if (y.frame <= 5) {
+              y.poofFrame = y.frame - 1;
+            } else {
+              y.poofFrame = -1;
+              y.grassFrame = 3;
+            }
+          }
+          y.bruceVisible = true;
+          return;
+        }
+        y.bruceX -= TROT_SPEED * 1.5;
+        y.bruceVisible = true;
+        if (every(y, 4)) y.frame++;
+        if (y.bruceX <= y.grassX + CELL_S * 0.5) {
+          y.bruceX = y.grassX + CELL_S * 0.5;
+          y.frame = 0;
+          y.state = STATE.preTalk;
+        }
+      }
+
+      function tickPreTalk(y) {
+        if (!every(y, 8)) return;
+        y.frame++;
+        y.bubbleStage = Math.min(y.frame, 4);
+        if (y.frame >= 7) {
+          y.frame = 0;
+          y.talkingTicks = 0;
+          y.bubbleStage = 7;
+          y.quote = selectQuote();
+          y.state = STATE.talking;
+        }
+      }
+
+      function tickTalking(y) {
+        if (every(y, 30)) y.frame++;
+        y.talkingTicks++;
+        const displayTicks = Math.max(180, y.quote.length * 6);
+        if (y.talkingTicks > displayTicks) {
+          y.talkingTicks = 0;
+          y.frame = 0;
+          y.state = STATE.postTalk;
+        }
+      }
+
+      function tickPostTalk(y) {
+        if (!every(y, 8)) return;
+        y.frame++;
+        y.bubbleStage = Math.max(0, 7 - y.frame);
+        if (y.frame >= 7) {
+          y.frame = 0;
+          y.bubbleStage = 0;
+          y.state = STATE.preTalk;
+        }
+      }
+
+      function tickRunningAway(y) {
+        y.bubbleStage = 0;
+        if (y.scaredPauseTicks < 30) {
+          y.scaredPauseTicks++;
+          return;
+        }
+        y.bruceX += SCARED_SPEED;
+        if (every(y, 3)) y.frame++;
+        if (y.bruceX > y.canvas.width + CELL_S * 2) {
+          y.scaredPauseTicks = 0;
+          dismissYak(y);
+        }
+      }
+
+      function checkMouse(y) {
+        if (
+          y.state !== STATE.preTalk &&
+          y.state !== STATE.talking &&
+          y.state !== STATE.postTalk
+        )
+          return;
+        const rect = y.canvas.getBoundingClientRect();
+        const bruceCX = y.bruceX + CELL_S / 2;
+        const bruceCY = STAGE_H - CELL_S / 2 - 4 * SCALE; // Bruce's actual center Y in canvas
+        const dx = y.mouseX - (rect.left + bruceCX);
+        const dy = y.mouseY - (rect.top + bruceCY);
+        if (Math.sqrt(dx * dx + dy * dy) < MOUSE_PROXIMITY) {
+          y.state = STATE.runningAway;
+          y.frame = 0;
+          y.bubbleStage = 0;
+          y.talkingTicks = 0;
+          y.scaredPauseTicks = 0;
+        }
+      }
+
+      function dismissYak(y) {
+        y.state = STATE.idle;
+        y.tick = 0;
+        y.frame = 0;
+        y.bruceVisible = false;
+        y.bruceX = y.canvas.width + CELL_S;
+        y.grassX = 0;
+        y.grassFrame = -1;
+        y.poofFrame = -1;
+        y.bubbleStage = 0;
+        y.quote = "";
+      }
+
+      // ── Renderer ──────────────────────────────────────────────────────────────
+      const FONT = `11px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif`;
+      const MAX_TEXT_W = 330;
+      const PADDING = 6;
+      const CORNER = 10;
+
+      function renderYak(y) {
+        const ctx = y.canvas.getContext("2d");
+        const W = y.canvas.width;
+        const H = y.canvas.height;
+        ctx.clearRect(0, 0, W, H);
+        ctx.imageSmoothingEnabled = false;
+
+        const sp = y.sprites;
+        const baseY = STAGE_H - CELL_S - 4 * SCALE; // Bruce near bottom of canvas
+
+        // Grass
+        if (y.grassFrame >= 0 && y.poofFrame < 0) {
+          const img = sp.grass[y.grassFrame];
+          ctx.drawImage(
+            img,
+            y.grassX,
+            baseY,
+            img.naturalWidth * SCALE,
+            img.naturalHeight * SCALE,
+          );
+        }
+
+        // Poof
+        if (y.poofFrame >= 0) {
+          const img = sp.poof[y.poofFrame];
+          const pw = img.naturalWidth * SCALE;
+          const ph = img.naturalHeight * SCALE;
+          ctx.drawImage(img, y.grassX + (CELL_S - pw) / 2, baseY, pw, ph);
+        }
+
+        // Bruce
+        if (y.bruceVisible) {
+          let img;
+          if (y.state === STATE.runningAway) {
+            img =
+              y.scaredPauseTicks < 30 ? sp.scared[0] : sp.scared[y.frame % 4];
+            ctx.drawImage(
+              img,
+              y.bruceX,
+              baseY,
+              img.naturalWidth * SCALE,
+              img.naturalHeight * SCALE,
+            );
+          } else if (y.state === STATE.talking) {
+            img = sp.graze[y.frame % 4];
+            ctx.drawImage(
+              img,
+              y.bruceX,
+              baseY,
+              img.naturalWidth * SCALE,
+              img.naturalHeight * SCALE,
+            );
+          } else if (y.state === STATE.preTalk || y.state === STATE.postTalk) {
+            img = sp.trot[0]; // stand still
+            ctx.drawImage(
+              img,
+              y.bruceX,
+              baseY,
+              img.naturalWidth * SCALE,
+              img.naturalHeight * SCALE,
+            );
+          } else {
+            // trotting
+            img = sp.trot[y.frame % 4];
+            ctx.drawImage(
+              img,
+              y.bruceX,
+              baseY,
+              img.naturalWidth * SCALE,
+              img.naturalHeight * SCALE,
+            );
+          }
+
+          // Thought bubble
+          if (y.bubbleStage > 0) {
+            drawBubble(ctx, y, baseY);
+          }
+        }
+      }
+
+      function drawBubble(ctx, y, baseY) {
+        const stage = y.bubbleStage;
+        const canvasW = y.canvas.width;
+        const connY = baseY + CELL_S * 0.4;
+        const anchorX = y.bruceX - 6;
+
+        // Small dot (stage >= 1)
+        if (stage >= 1) {
+          ctx.beginPath();
+          ctx.arc(anchorX - 6, connY, 3, 0, Math.PI * 2);
+          ctx.fillStyle = "white";
+          ctx.fill();
+          ctx.strokeStyle = "black";
+          ctx.lineWidth = 1;
+          ctx.stroke();
+        }
+
+        // Big dot (stage >= 3) — up and to the left
+        if (stage >= 3) {
+          ctx.beginPath();
+          ctx.arc(anchorX - 20, connY - 4, 5, 0, Math.PI * 2);
+          ctx.fillStyle = "white";
+          ctx.fill();
+          ctx.strokeStyle = "black";
+          ctx.lineWidth = 1;
+          ctx.stroke();
+        }
+
+        // Speech bubble (stage >= 5) — above and to the left, clamped to screen
+        if (stage >= 5 && y.quote) {
+          ctx.font = FONT;
+          const maxW = Math.min(MAX_TEXT_W, canvasW - 16);
+          const words = y.quote.split(" ");
+          const lines = [];
+          let line = "";
+          for (const w of words) {
+            const test = line ? line + " " + w : w;
+            if (ctx.measureText(test).width > maxW) {
+              if (line) lines.push(line);
+              line = w;
+            } else {
+              line = test;
+            }
+          }
+          if (line) lines.push(line);
+
+          const lineH = 11 + 3;
+          const textW = Math.max(...lines.map((l) => ctx.measureText(l).width));
+          const bw = textW + PADDING * 2;
+          const bh = Math.max(lines.length * lineH + PADDING * 2, 20);
+          const bx = Math.max(4, anchorX - 24 - bw - 4);
+          let by = connY - 4 - bh;
+          // If bubble overlaps Bruce, push it above his head
+          if (by + bh > baseY) by = baseY - 4 - bh;
+
+          ctx.beginPath();
+          roundRect(ctx, bx, by, bw, bh, CORNER);
+          ctx.fillStyle = "white";
+          ctx.fill();
+          ctx.strokeStyle = "black";
+          ctx.lineWidth = 1;
+          ctx.stroke();
+
+          ctx.fillStyle = "black";
+          ctx.textBaseline = "top";
+          for (let i = 0; i < lines.length; i++) {
+            ctx.fillText(lines[i], bx + PADDING, by + PADDING + i * lineH);
+          }
+        }
+      }
+
+      function roundRect(ctx, x, y, w, h, r) {
+        ctx.moveTo(x + r, y);
+        ctx.lineTo(x + w - r, y);
+        ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+        ctx.lineTo(x + w, y + h - r);
+        ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+        ctx.lineTo(x + r, y + h);
+        ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+        ctx.lineTo(x, y + r);
+        ctx.quadraticCurveTo(x, y, x + r, y);
+        ctx.closePath();
+      }
+
+      // ── Bootstrap ─────────────────────────────────────────────────────────────
+      (async () => {
+        const canvas = document.getElementById("yak-stage");
+        const sprites = await loadSprites();
+
+        function resize() {
+          canvas.width = window.innerWidth;
+          canvas.height = STAGE_H;
+          canvas.style.height = STAGE_H + "px";
+          if (yak) yak.canvas = canvas;
+        }
+        resize();
+        window.addEventListener("resize", resize);
+
+        window.addEventListener("mousemove", (e) => {
+          if (yak) {
+            yak.mouseX = e.clientX;
+            yak.mouseY = e.clientY;
+          }
+        });
+        window.addEventListener(
+          "touchmove",
+          (e) => {
+            if (yak && e.touches.length > 0) {
+              yak.mouseX = e.touches[0].clientX;
+              yak.mouseY = e.touches[0].clientY;
+            }
+          },
+          { passive: true },
+        );
+
+        yak = initYak(sprites, canvas);
+
+        function loop() {
+          if (yak) {
+            tickYak(yak);
+            renderYak(yak);
+          }
+          requestAnimationFrame(loop);
+        }
+        loop();
+      })();
+
+      function callTheYak() {
+        if (!yak) return;
+        // If already visible and talking, skip to next quote
+        if (
+          yak.state === STATE.talking ||
+          yak.state === STATE.preTalk ||
+          yak.state === STATE.postTalk
+        ) {
+          yak.state = STATE.runningAway;
+          yak.frame = 0;
+          yak.bubbleStage = 0;
+          yak.talkingTicks = 0;
+          yak.scaredPauseTicks = 0;
+          return;
+        }
+        if (yak.state !== STATE.idle) return;
+        const W = yak.canvas.width;
+        yak.grassX = randomGrassX(W);
+        yak.bruceX = W + CELL_S;
+        yak.grassFrame = -1;
+        yak.poofFrame = -1;
+        yak.frame = 0;
+        yak.tick = 0;
+        yak.bruceVisible = true;
+        yak.state = STATE.triggeredTrot;
+      }
+    </script>
   </body>
 </html>
