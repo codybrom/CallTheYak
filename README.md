@@ -25,8 +25,6 @@ When Bruce appears:
 3. He stops, grazes, and shares a random musings in a thought bubble
 4. He'll loops through his library of quotes until you move your mouse near him, at which point he'll bolt off-screen
 
----
-
 ## Building
 
 Requires **Xcode 15+** and **macOS 14.0 (Sonoma)** or later.
