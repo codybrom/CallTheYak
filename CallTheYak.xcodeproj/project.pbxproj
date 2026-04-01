@@ -1,0 +1,372 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A10001 /* BruceApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10001 /* BruceApp.swift */; };
+		A10002 /* YakManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10002 /* YakManager.swift */; };
+		A10003 /* YakWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10003 /* YakWindow.swift */; };
+		A10004 /* YakView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10004 /* YakView.swift */; };
+		A10005 /* SpriteSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10005 /* SpriteSheet.swift */; };
+		A10006 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10006 /* SettingsView.swift */; };
+		A10007 /* YakScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10007 /* YakScene.swift */; };
+		A10010 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B10010 /* Assets.xcassets */; };
+		A10013 /* Quotes.plist in Resources */ = {isa = PBXBuildFile; fileRef = B10013 /* Quotes.plist */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		B10001 /* BruceApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BruceApp.swift; sourceTree = "<group>"; };
+		B10002 /* YakManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YakManager.swift; sourceTree = "<group>"; };
+		B10003 /* YakWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YakWindow.swift; sourceTree = "<group>"; };
+		B10004 /* YakView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YakView.swift; sourceTree = "<group>"; };
+		B10005 /* SpriteSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpriteSheet.swift; sourceTree = "<group>"; };
+		B10006 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		B10007 /* YakScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YakScene.swift; sourceTree = "<group>"; };
+		B10010 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B10013 /* Quotes.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Quotes.plist; sourceTree = "<group>"; };
+		B10020 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B10021 /* CallTheYak.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CallTheYak.entitlements; sourceTree = "<group>"; };
+		B10030 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
+		B10099 /* CallTheYak.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CallTheYak.app; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		C10001 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		D10000 = {
+			isa = PBXGroup;
+			children = (
+				D10001 /* CallTheYak */,
+				D10099 /* Products */,
+				B10030 /* Config.xcconfig */,
+			);
+			sourceTree = "<group>";
+		};
+		D10001 /* CallTheYak */ = {
+			isa = PBXGroup;
+			children = (
+				B10001 /* BruceApp.swift */,
+				B10002 /* YakManager.swift */,
+				B10003 /* YakWindow.swift */,
+				B10004 /* YakView.swift */,
+				B10005 /* SpriteSheet.swift */,
+				B10006 /* SettingsView.swift */,
+				B10007 /* YakScene.swift */,
+				B10020 /* Info.plist */,
+				B10021 /* CallTheYak.entitlements */,
+				D10002 /* Resources */,
+			);
+			path = CallTheYak;
+			sourceTree = "<group>";
+		};
+		D10002 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				B10010 /* Assets.xcassets */,
+				B10013 /* Quotes.plist */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		D10099 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B10099 /* CallTheYak.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		E10001 /* CallTheYak */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F10003 /* Build configuration list for PBXNativeTarget "CallTheYak" */;
+			buildPhases = (
+				C10002 /* Sources */,
+				C10001 /* Frameworks */,
+				C10003 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CallTheYak;
+			productName = CallTheYak;
+			productReference = B10099 /* CallTheYak.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		E10000 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1540;
+				LastUpgradeCheck = 2630;
+			};
+			buildConfigurationList = F10001 /* Build configuration list for PBXProject "BruceTheWonderYak" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = D10000;
+			productRefGroup = D10099 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				E10001 /* CallTheYak */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		C10003 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A10010 /* Assets.xcassets in Resources */,
+				A10013 /* Quotes.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		C10002 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A10001 /* BruceApp.swift in Sources */,
+				A10002 /* YakManager.swift in Sources */,
+				A10003 /* YakWindow.swift in Sources */,
+				A10004 /* YakView.swift in Sources */,
+				A10005 /* SpriteSheet.swift in Sources */,
+				A10006 /* SettingsView.swift in Sources */,
+				A10007 /* YakScene.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		F10010 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		F10011 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		F10020 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B10030 /* Config.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				AUTOMATION_APPLE_EVENTS = NO;
+				CODE_SIGN_ENTITLEMENTS = CallTheYak/CallTheYak.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
+				ENABLE_APP_SANDBOX = NO;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_RESOURCE_ACCESS_PHOTO_LIBRARY = NO;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = CallTheYak/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Call the Yak";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.codybrom.calltheyak;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				RUNTIME_EXCEPTION_ALLOW_DYLD_ENVIRONMENT_VARIABLES = NO;
+				RUNTIME_EXCEPTION_ALLOW_JIT = NO;
+				RUNTIME_EXCEPTION_ALLOW_UNSIGNED_EXECUTABLE_MEMORY = NO;
+				RUNTIME_EXCEPTION_DEBUGGING_TOOL = NO;
+				RUNTIME_EXCEPTION_DISABLE_EXECUTABLE_PAGE_PROTECTION = NO;
+				RUNTIME_EXCEPTION_DISABLE_LIBRARY_VALIDATION = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		F10021 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B10030 /* Config.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				AUTOMATION_APPLE_EVENTS = NO;
+				CODE_SIGN_ENTITLEMENTS = CallTheYak/CallTheYak.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
+				ENABLE_APP_SANDBOX = NO;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_RESOURCE_ACCESS_PHOTO_LIBRARY = NO;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = CallTheYak/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Call the Yak";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.codybrom.calltheyak;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				RUNTIME_EXCEPTION_ALLOW_DYLD_ENVIRONMENT_VARIABLES = NO;
+				RUNTIME_EXCEPTION_ALLOW_JIT = NO;
+				RUNTIME_EXCEPTION_ALLOW_UNSIGNED_EXECUTABLE_MEMORY = NO;
+				RUNTIME_EXCEPTION_DEBUGGING_TOOL = NO;
+				RUNTIME_EXCEPTION_DISABLE_EXECUTABLE_PAGE_PROTECTION = NO;
+				RUNTIME_EXCEPTION_DISABLE_LIBRARY_VALIDATION = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F10001 /* Build configuration list for PBXProject "BruceTheWonderYak" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F10010 /* Debug */,
+				F10011 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F10003 /* Build configuration list for PBXNativeTarget "CallTheYak" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F10020 /* Debug */,
+				F10021 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = E10000 /* Project object */;
+}
