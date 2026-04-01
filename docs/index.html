@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Call the Yak</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        background: #1a1a1a;
+        color: #f0f0f0;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem;
+        text-align: center;
+      }
+
+      .bruce {
+        image-rendering: pixelated;
+        width: 124px;
+        height: 128px;
+        margin-bottom: 1.5rem;
+      }
+
+      h1 {
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+        color: #fff;
+      }
+
+      .tagline {
+        font-size: 1rem;
+        color: #aaa;
+        margin-bottom: 2rem;
+        max-width: 420px;
+      }
+
+      .download-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: #cc9966;
+        color: #1a1a1a;
+        text-decoration: none;
+        font-size: 1.05rem;
+        font-weight: 600;
+        padding: 0.75rem 1.75rem;
+        border-radius: 10px;
+        transition:
+          background 0.15s,
+          transform 0.1s,
+          box-shadow 0.15s;
+        margin-bottom: 0.75rem;
+        cursor: pointer;
+      }
+
+      .download-btn:hover {
+        background: #e0b080;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(204, 153, 102, 0.4);
+        cursor: pointer;
+      }
+
+      .download-btn svg {
+        flex-shrink: 0;
+      }
+
+      .version-info {
+        font-size: 0.8rem;
+        color: #777;
+        margin-bottom: 2.5rem;
+      }
+
+      .version-info a {
+        color: #999;
+      }
+
+      .instructions {
+        background: #2a2a2a;
+        border-radius: 10px;
+        padding: 1.25rem 1.75rem;
+        max-width: 400px;
+        text-align: left;
+      }
+
+      .instructions h2 {
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: #888;
+        margin-bottom: 0.75rem;
+      }
+
+      .instructions ol {
+        padding-left: 1.25rem;
+        color: #ccc;
+        font-size: 0.9rem;
+        line-height: 1.7;
+      }
+
+      .footer {
+        margin-top: 3rem;
+        font-size: 0.75rem;
+        color: #555;
+      }
+
+      .footer a {
+        color: #666;
+      }
+    </style>
+  </head>
+  <body>
+    <img class="bruce" src="../bruce.svg" alt="Bruce the Wonder Yak" />
+
+    <h1>Call the Yak</h1>
+    <p class="tagline">
+      A faithful recreation of the hidden yak easter egg from Final Cut Pro.
+      <i>Bruce the Wonder Yak</i> trots across the bottom of your screen and
+      shares pearls of wisdom.
+    </p>
+
+    <a
+      class="download-btn"
+      href="https://github.com/codybrom/CallTheYak/releases/download/v1.0.0/CallTheYak.zip"
+    >
+      <svg
+        width="16"
+        height="16"
+        viewBox="0 0 16 16"
+        fill="currentColor"
+        aria-hidden="true"
+      >
+        <path
+          d="M7.47 10.78a.75.75 0 0 0 1.06 0l3.75-3.75a.75.75 0 0 0-1.06-1.06L8.75 8.44V1.75a.75.75 0 0 0-1.5 0v6.69L4.78 5.97a.75.75 0 0 0-1.06 1.06l3.75 3.75Z"
+        />
+        <path
+          d="M1.75 11.5a.75.75 0 0 0-.75.75v1c0 .966.784 1.75 1.75 1.75h10.5A1.75 1.75 0 0 0 15 13.25v-1a.75.75 0 0 0-1.5 0v1a.25.25 0 0 1-.25.25H2.75a.25.25 0 0 1-.25-.25v-1a.75.75 0 0 0-.75-.75Z"
+        />
+      </svg>
+      Download for Mac
+    </a>
+
+    <p class="version-info">
+      v1.0.0 &nbsp;·&nbsp; macOS 14 Sonoma or later &nbsp;·&nbsp;
+      <a
+        href="https://github.com/codybrom/CallTheYak/releases"
+        target="_blank"
+        rel="noopener"
+        >All releases</a
+      >
+    </p>
+
+    <div class="instructions">
+      <h2>Installing</h2>
+      <ol>
+        <li>Download and unzip <strong>CallTheYak.zip</strong></li>
+        <li>Drag the app to your Applications folder</li>
+        <li>Launch it and <strong>Call the Yak</strong> from your menu bar</li>
+      </ol>
+    </div>
+
+    <p class="footer">
+      Made by
+      <a href="https://github.com/codybrom" target="_blank" rel="noopener"
+        >@codybrom</a
+      >
+      &nbsp;·&nbsp; Fan-made tribute not affiliated with Apple &nbsp;·&nbsp;
+      <a
+        href="https://github.com/codybrom/CallTheYak"
+        target="_blank"
+        rel="noopener"
+        >Source on GitHub</a
+      >
+    </p>
+  </body>
+</html>
