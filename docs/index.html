@@ -110,8 +110,17 @@
 
       .footer {
         margin-top: 3rem;
+        margin-bottom: 180px;
         font-size: 0.75rem;
         color: #555;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.35rem;
+      }
+
+      .footer .sep {
+        display: none;
       }
 
       .footer a {
@@ -163,9 +172,11 @@
 
     <h1>Call the Yak</h1>
     <p class="tagline">
-      A faithful recreation of the hidden yak easter egg from Final Cut Pro.
-      <i>Bruce the Wonder Yak</i> trots across the bottom of your screen and
-      shares pearls of wisdom.
+      A faithful recreation of the classic Final Cut Pro mascot/easter egg.
+      Summon
+      <i>Bruce the Wonder Yak</i> and watch him trot across your screen to graze
+      and share his pearls of "wisdom." But don't get too close or you might
+      scare him off.
     </p>
 
     <button class="try-btn" id="call-btn" onclick="callTheYak()">
@@ -224,11 +235,15 @@
     </div>
 
     <p class="footer">
-      Made by
-      <a href="https://github.com/codybrom" target="_blank" rel="noopener"
-        >@codybrom</a
+      <span
+        >Made by
+        <a href="https://github.com/codybrom" target="_blank" rel="noopener"
+          >@codybrom</a
+        ></span
       >
-      &nbsp;·&nbsp; Fan-made tribute not affiliated with Apple &nbsp;·&nbsp;
+      <span class="sep">·</span>
+      <span>Fan-made tribute, not affiliated with Apple</span>
+      <span class="sep">·</span>
       <a
         href="https://github.com/codybrom/CallTheYak"
         target="_blank"
@@ -432,9 +447,6 @@
         checkMouse(y);
 
         switch (y.state) {
-          case STATE.idle:
-            tickIdle(y);
-            break;
           case STATE.grassGrowing:
             tickGrassGrowing(y);
             break;
@@ -459,18 +471,6 @@
           case STATE.runningAway:
             tickRunningAway(y);
             break;
-        }
-      }
-
-      function tickIdle(y) {
-        if (!every(y, 20)) return;
-        y.frame++;
-        if (y.frame >= 6) {
-          y.frame = 0;
-          y.state = STATE.grassGrowing;
-          const W = y.canvas.width;
-          y.grassX = randomGrassX(W);
-          y.bruceX = W + CELL_S;
         }
       }
 
@@ -711,7 +711,7 @@
       function drawBubble(ctx, y, baseY) {
         const stage = y.bubbleStage;
         const canvasW = y.canvas.width;
-        const connY = baseY + CELL_S * 0.4;
+        const connY = baseY + CELL_S * 0.18;
         const anchorX = y.bruceX - 6;
 
         // Small dot (stage >= 1)
@@ -792,65 +792,54 @@
         ctx.closePath();
       }
 
-      // ── Bootstrap ─────────────────────────────────────────────────────────────
-      (async () => {
-        const canvas = document.getElementById("yak-stage");
-        const sprites = await loadSprites();
+      // ── Bootstrap (lazy — nothing runs until button click) ────────────────────
+      let spritesCache = null;
 
-        function resize() {
-          canvas.width = window.innerWidth;
-          canvas.height = STAGE_H;
-          canvas.style.height = STAGE_H + "px";
-          if (yak) yak.canvas = canvas;
-        }
-        resize();
-        window.addEventListener("resize", resize);
+      async function callTheYak() {
+        if (yak && yak.state !== STATE.idle) return;
 
-        window.addEventListener("mousemove", (e) => {
-          if (yak) {
-            yak.mouseX = e.clientX;
-            yak.mouseY = e.clientY;
+        if (!yak) {
+          const canvas = document.getElementById("yak-stage");
+          if (!spritesCache) spritesCache = await loadSprites();
+
+          function resize() {
+            canvas.width = window.innerWidth;
+            canvas.height = STAGE_H;
+            canvas.style.height = STAGE_H + "px";
+            if (yak) yak.canvas = canvas;
           }
-        });
-        window.addEventListener(
-          "touchmove",
-          (e) => {
-            if (yak && e.touches.length > 0) {
-              yak.mouseX = e.touches[0].clientX;
-              yak.mouseY = e.touches[0].clientY;
+          resize();
+          window.addEventListener("resize", resize);
+
+          window.addEventListener("mousemove", (e) => {
+            if (yak) {
+              yak.mouseX = e.clientX;
+              yak.mouseY = e.clientY;
             }
-          },
-          { passive: true },
-        );
+          });
+          window.addEventListener(
+            "touchmove",
+            (e) => {
+              if (yak && e.touches.length > 0) {
+                yak.mouseX = e.touches[0].clientX;
+                yak.mouseY = e.touches[0].clientY;
+              }
+            },
+            { passive: true },
+          );
 
-        yak = initYak(sprites, canvas);
+          yak = initYak(spritesCache, canvas);
 
-        function loop() {
-          if (yak) {
-            tickYak(yak);
-            renderYak(yak);
+          function loop() {
+            if (yak) {
+              tickYak(yak);
+              renderYak(yak);
+            }
+            requestAnimationFrame(loop);
           }
-          requestAnimationFrame(loop);
+          loop();
         }
-        loop();
-      })();
 
-      function callTheYak() {
-        if (!yak) return;
-        // If already visible and talking, skip to next quote
-        if (
-          yak.state === STATE.talking ||
-          yak.state === STATE.preTalk ||
-          yak.state === STATE.postTalk
-        ) {
-          yak.state = STATE.runningAway;
-          yak.frame = 0;
-          yak.bubbleStage = 0;
-          yak.talkingTicks = 0;
-          yak.scaredPauseTicks = 0;
-          return;
-        }
-        if (yak.state !== STATE.idle) return;
         const W = yak.canvas.width;
         yak.grassX = randomGrassX(W);
         yak.bruceX = W + CELL_S;

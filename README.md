@@ -2,9 +2,10 @@
 
 <img src="bruce.svg" width="96" alt="Bruce the Wonder Yak" />
 
-A faithful modern macOS recreation of an old Final Cut Pro easter egg.
+> The opposite of "weird" is "boring".
+> — Bruce the Wonder Yak
 
-Bruce is a brown yak who lives in your Mac. Every so often he trots across the bottom of your screen, stops to graze and shares pearls of wisdom via thought bubble. But don't get too close or you might scare him off.
+A faithful recreation of the classic Final Cut Pro mascot/easter egg. Summon *Bruce the Wonder Yak* and watch him trot across your screen to graze and share his pearls of "wisdom." But don't get too close or you might scare him off.
 
 ## Installing
 

@@ -23,7 +23,7 @@ final class YakWindow: NSPanel {
         self.isOpaque = false
         self.backgroundColor = .clear
         self.hasShadow = false
-        self.level = .floating
+        self.level = .screenSaver
         self.collectionBehavior = [.canJoinAllSpaces, .stationary, .ignoresCycle]
         self.ignoresMouseEvents = false
         self.isMovable = false

@@ -38,7 +38,7 @@ struct SettingsView: View {
                 .padding(.top, 4)
 
             VStack(alignment: .leading, spacing: 4) {
-                Text("Call the Yak v1.0 by Cody Bromley (https://github.com/codybrom)")
+                Text("Call the Yak v\(Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "?") by Cody Bromley (https://github.com/codybrom)")
                     .font(.caption)
                     .foregroundColor(.secondary)
                 Text("Bruce the Wonder Yak was created by the Final Cut Pro team at Apple.")

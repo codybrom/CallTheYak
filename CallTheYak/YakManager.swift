@@ -194,7 +194,7 @@ final class YakManager: ObservableObject {
             state = .grassGrowing
             if let screen = NSScreen.main {
                 let screenW = screen.frame.width
-                grassX = screenW * 0.3 + CGFloat.random(in: 0...(screenW * 0.4))
+                grassX = screenW * 0.7
                 bruceX = screenW + Self.scaledCellWidth
             }
         }
@@ -258,7 +258,7 @@ final class YakManager: ObservableObject {
         if let screen = NSScreen.main {
             let screenW = screen.frame.width
             if grassX == 0 {
-                grassX = screenW * 0.3 + CGFloat.random(in: 0...(screenW * 0.4))
+                grassX = screenW * 0.7
             }
             if bruceX == 0 || bruceX > screenW + Self.scaledCellWidth {
                 bruceX = screenW + Self.scaledCellWidth
@@ -409,7 +409,7 @@ final class YakManager: ObservableObject {
             currentQuote = "You can call me Bruce the Wonder Yak."
             return
         }
-        quoteIndex = Int.random(in: 0..<quotes.count)
         currentQuote = quotes[quoteIndex]
+        quoteIndex = (quoteIndex + 1) % quotes.count
     }
 }
