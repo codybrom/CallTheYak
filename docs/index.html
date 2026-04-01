@@ -4,6 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Call the Yak</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png" />
     <meta
       name="description"
       content="A faithful recreation of Bruce the Wonder Yak, the classic Final Cut Pro easter egg."
@@ -65,8 +67,26 @@
       .tagline {
         font-size: 1rem;
         color: #aaa;
+        margin-bottom: 1.5rem;
+        max-width: 420px;
+      }
+
+      .bruce-quote {
+        font-size: 1rem;
+        font-style: italic;
+        color: #ccc;
+        border-left: 3px solid #cc9966;
+        padding-left: 1rem;
         margin-bottom: 2rem;
         max-width: 420px;
+      }
+
+      .bruce-quote cite {
+        display: block;
+        font-size: 0.8rem;
+        font-style: normal;
+        color: #888;
+        margin-top: 0.4rem;
       }
 
       .download-btn {
@@ -196,12 +216,14 @@
 
     <h1>Call the Yak</h1>
     <p class="tagline">
-      A faithful recreation of the classic Final Cut Pro mascot/easter egg.
-      Summon
-      <i>Bruce the Wonder Yak</i> and watch him trot across your screen to graze
-      and share his pearls of "wisdom." But don't get too close or you might
-      scare him off.
+      A faithful recreation of the classic Final Cut Pro mascot/easter egg,
+      <i>Bruce the Wonder Yak</i>.
     </p>
+
+    <blockquote class="bruce-quote">
+      The opposite of "weird" is "boring."
+      <cite>— Bruce the Wonder Yak</cite>
+    </blockquote>
 
     <button class="try-btn" id="call-btn" onclick="callTheYak()">
       <svg
