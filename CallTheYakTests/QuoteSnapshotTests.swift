@@ -35,34 +35,16 @@ private struct BruceQuoteView: View {
     let quote: String
     let bundle: Bundle
 
-    // Binary-searches for the narrowest width that keeps the same line count as
-    // the full 330pt max — eliminates trailing whitespace on multi-line quotes.
+    // Measure the single-line text width — the bubble fits the text, no wrapping.
     private var textWidth: CGFloat {
         let font = NSFont.systemFont(ofSize: 11)
         let attrs: [NSAttributedString.Key: Any] = [.font: font]
-        let maxWidth: CGFloat = 330
-
-        func height(at width: CGFloat) -> CGFloat {
-            ceil((quote as NSString).boundingRect(
-                with: NSSize(width: width, height: 1000),
-                options: [.usesLineFragmentOrigin, .usesFontLeading],
-                attributes: attrs
-            ).size.height)
-        }
-
-        let targetHeight = height(at: maxWidth)
-        var lo: CGFloat = 1
-        var hi: CGFloat = maxWidth
-        while hi - lo > 0.5 {
-            let mid = (lo + hi) / 2
-            if height(at: mid) <= targetHeight { hi = mid } else { lo = mid }
-        }
-        return ceil(hi)
+        return ceil((quote as NSString).size(withAttributes: attrs).width)
     }
 
     var body: some View {
         HStack(alignment: .center, spacing: 4) {
-            Text(quote)
+            Text(verbatim: quote)
                 .font(.system(size: 11))
                 .multilineTextAlignment(.leading)
                 .frame(width: textWidth, alignment: .leading)

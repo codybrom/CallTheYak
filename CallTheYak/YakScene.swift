@@ -265,11 +265,18 @@ final class YakScene: SKScene {
     private func rebuildBubble(quote: String, anchorX: CGFloat, anchorY: CGFloat) {
         let padding: CGFloat = 6
         let cornerRadius: CGFloat = 10
-        let maxTextWidth: CGFloat = 330
 
-        // Measure text
         let font = NSFont.systemFont(ofSize: 11)
         let attrs: [NSAttributedString.Key: Any] = [.font: font]
+
+        // Measure single-line width first
+        let singleLineSize = (quote as NSString).size(withAttributes: attrs)
+        let singleLineW = ceil(singleLineSize.width) + padding * 2
+
+        // Only wrap if the bubble would go off the left edge of the screen
+        let bubbleX = anchorX - singleLineW - 4
+        let maxTextWidth = bubbleX < 4 ? anchorX - 12 - padding * 2 : CGFloat.greatestFiniteMagnitude
+
         let textSize = (quote as NSString).boundingRect(
             with: NSSize(width: maxTextWidth, height: 200),
             options: [.usesLineFragmentOrigin, .usesFontLeading],
@@ -280,11 +287,11 @@ final class YakScene: SKScene {
         let bubbleH = max(ceil(textSize.height) + padding * 2, 20)
 
         // Position bubble to the left of the anchor point
-        let bubbleX = anchorX - bubbleW - 4
+        let finalBubbleX = max(4, anchorX - bubbleW - 4)
         let bubbleY = anchorY - bubbleH / 2
 
         // Rebuild shape
-        let rect = CGRect(x: bubbleX, y: bubbleY, width: bubbleW, height: bubbleH)
+        let rect = CGRect(x: finalBubbleX, y: bubbleY, width: bubbleW, height: bubbleH)
         bubbleShape.removeFromParent()
         bubbleShape = SKShapeNode(rect: rect, cornerRadius: cornerRadius)
         bubbleShape.fillColor = .white
@@ -295,9 +302,9 @@ final class YakScene: SKScene {
 
         // Position label
         bubbleLabel.text = quote
-        bubbleLabel.preferredMaxLayoutWidth = maxTextWidth
+        bubbleLabel.preferredMaxLayoutWidth = maxTextWidth == .greatestFiniteMagnitude ? 0 : maxTextWidth
         bubbleLabel.position = CGPoint(
-            x: bubbleX + padding,
+            x: finalBubbleX + padding,
             y: bubbleY + bubbleH / 2
         )
     }
