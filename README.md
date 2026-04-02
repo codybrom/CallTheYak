@@ -1,6 +1,6 @@
 # Call the Yak
 
-<img src="bruce.svg" width="96" alt="Bruce the Wonder Yak" />
+<img src="docs/bruce.svg" width="96" alt="Bruce the Wonder Yak" />
 
 > The opposite of "weird" is "boring".
 > — Bruce the Wonder Yak

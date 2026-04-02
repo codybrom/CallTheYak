@@ -175,7 +175,7 @@ final class YakScene: SKScene {
                 case "scared":
                     if let action = scaredAction { bruceNode.run(action, withKey: "anim") }
                 case "stand":
-                    if let tex = manager.spriteSheet?.trotTexture(at: 0) {
+                    if let tex = manager.spriteSheet?.trotTexture(at: 1) {
                         bruceNode.texture = tex
                     }
                 case "scaredPause":
