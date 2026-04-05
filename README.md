@@ -7,6 +7,8 @@
 
 A faithful recreation of the classic Final Cut Pro mascot/easter egg. Summon *Bruce the Wonder Yak* and watch him trot across your screen to graze and share his pearls of "wisdom." But don't get too close or you might scare him off.
 
+Don't know who Bruce is? [Learn his history here](https://b10g.xyz/blog/2026/the-yak-is-back/).
+
 ## Installing
 
 Unzip the release, then drag `Call the Yak.app` to your Applications folder.
@@ -15,7 +17,7 @@ Unzip the release, then drag `Call the Yak.app` to your Applications folder.
 
 Bruce runs in your **menu bar** with options to:
 
-- **Call the Yak** (or press **Cmd+Shift+Y**) to summon Bruce immediately
+- **Call the Yak** to summon Bruce immediately
 - **Settings** to adjust how often he appears (5 min to 2 hours)
 - **Quit Bruce**, when you've had enough yak
 
